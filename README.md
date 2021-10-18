@@ -1,0 +1,2 @@
+# ejerciciopractico
+Prueba tecnica
