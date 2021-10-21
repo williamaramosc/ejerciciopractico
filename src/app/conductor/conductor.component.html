@@ -1,0 +1,138 @@
+<div class="container box">
+    <p-toast position="top-center" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" [baseZIndex]="5000"
+        key="tc">
+    </p-toast>
+    <div class="row">
+        <div *ngIf="!prepararConductor">
+            <h2 class="titulo">Conductor</h2>
+            <p-toolbar>
+                <div class="p-toolbar-group-left">
+                    <button pButton icon="pi pi-plus" label="Agregar"
+                        (click)="prepararNuevo()"></button>
+                </div>
+                <div class="p-toolbar-group-right">
+                </div>
+            </p-toolbar>
+
+            <p-table [columns]="columnas" [value]="registros" [rows]="5" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Total Registros: {totalRecords}" [paginator]="true">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            <b>{{col.header}}</b>
+                        </th>
+                        <th style="width: 270px; text-align:center"><b>Acciones</b></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns">
+                            <span class="p-column-title">{{col.header}}</span>
+                            {{ rowData[col.field]}}
+                        </td>
+                        <td>
+                            <button pButton label="Editar" class="mx-2" icon="pi pi-pencil"
+                                pTooltip="Editar" (click)="editarConductor(rowData)">
+                            </button>
+                            <button pButton label="Eliminar" icon="pi pi-times"
+                                pTooltip="Eliminar" (click)="eliminarConductor(rowData['id'])">
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <div *ngIf="prepararConductor">
+            <h2 class="titulo">Agregar Conductor</h2>
+            <p-toolbar>
+                <div class="p-toolbar-group-left">
+                    <button pButton icon="pi pi-arrow-left" label="Volver" (click)="volver()"></button>
+                </div>
+                <div class="p-toolbar-group-right">
+                </div>
+            </p-toolbar>
+
+            <form [formGroup]="formularioConductor" class="posicion-form">
+
+                <div class="row">
+                    <div class="col-12 col-md-6 col-sm-6">
+                        <label for="nombre">Nombre:<span style="color: #a94442;">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('nombre')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6">
+                        <label for="apellido">Apellido:<span style="color: #a94442;">*</span></label>
+                        <input type="text" class="form-control" formControlName="apellido" placeholder="Apellido">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('apellido')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6">
+                        <label for="cedula">Cédula:<span style="color: #a94442;">*</span></label>
+                        <input type="number" class="form-control" formControlName="cedula" placeholder="Cédula">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('cedula')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6">
+                        <label for="direccion">Dirección:<span style="color: #a94442;">*</span></label>
+                        <input type="text" class="form-control" formControlName="direccion" placeholder="Dirección">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('direccion')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6">
+                        <label for="telefono">Teléfono:<span style="color: #a94442;">*</span></label>
+                        <input type="number" class="form-control" formControlName="telefono" placeholder="Teléfono">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('telefono')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6">
+                        <label for="pais">País:<span style="color: #a94442;">*</span></label>
+                        <input type="text" class="form-control" formControlName="pais" placeholder="País">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('pais')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6"
+                        *ngIf=" formularioConductor.value.pais && (formularioConductor.value.pais != '')">
+                        <label for="ciudad_nacimiento">Ciudad Nacimiento:<span style="color: #a94442;">*</span></label>
+                        <input type="text" class="form-control" formControlName="ciudad_nacimiento"
+                            placeholder="Ciudad Nacimiento">
+                        <small style="color: #a94442;" *ngIf="campoNoValido('ciudad_nacimiento')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6" *ngIf="!botonEditar">
+                        <label for="vehiculo">Vehiculo:<span style="color: #a94442;">*</span></label>
+                        <p-dropdown [options]="listaVehiculos" placeholder="Vehiculo" [style]="{'width':'100%'}"
+                            formControlName="placa" [autoDisplayFirst]="false">
+                        </p-dropdown>
+                        <small style="color: #a94442;" *ngIf="campoNoValido('placa')">Campo
+                            Obligatorio</small>
+                    </div>
+                    <div class="col-12 col-md-6 col-sm-6" *ngIf="!botonEditar">
+                        <label for="supervisor">Supervisor:<span style="color: #a94442;">*</span></label>
+                        <p-dropdown [options]="listaFormulario" placeholder="Supervisor" [style]="{'width':'100%'}"
+                            formControlName="id_supervisor" [autoDisplayFirst]="false">
+                        </p-dropdown>
+                        <small style="color: #a94442;" *ngIf="campoNoValido('id_supervisor')">Campo
+                            Obligatorio</small>
+                    </div>
+
+                </div>
+                <div>
+                    <p-toolbar>
+                        <div class="ui-toolbar-group-left">
+                            <button *ngIf="botonGuardar" pButton label="Guardar" icon="pi pi-save"
+                                pTooltip="Guardar" type="submit" (click)="agregar()">
+                            </button>
+                            <button *ngIf="botonEditar" pButton label="Editar" icon="pi pi-save"
+                                pTooltip="Editar" (click)="actualizar()">
+                            </button>
+                        </div>
+                        <div class="ui-toolbar-group-right">
+                        </div>
+                    </p-toolbar>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="container box">
+    <div class="row">
+        <div>
+            <h2 class="titulo">Supervisores</h2>
+
+            <p-table [columns]="columnas" [value]="registros"  [rows]="5"
+                [showCurrentPageReport]="true" 
+                currentPageReportTemplate="Total Registros: {totalRecords}" [paginator]="true">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns">
+                            <b>{{col.header}}</b>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns">
+                            <span class="p-column-title">{{col.header}}</span>
+                            {{ rowData[col.field]}}
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>

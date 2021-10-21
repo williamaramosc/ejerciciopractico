@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+html{
+    background-color: whitesmoke;
+}
+
+.contenido{
+    padding: 50px;
+    background-color: whitesmoke;
+}
+
+.p-toolbar {
+    background: white;
+    border: 0px solid #dee2e6;
+    padding: 1rem;
+    border-radius: 0px!important;
+    background-color: white;
+}
+.box {
+    border: 1px solid rgba(0, 0, 0, .0625)!important;
+    background: white;
+    border-radius: 25px;
+    margin: 40px;
+    display: flow-root;
+}
+
+.titulo {
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+.titulo2 {
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+h2{
+    color: #4a6391;
+}
+
+h3{
+    color: #6a7da1;
+}
+
+h4{
+    color: #132b5c;
+}
+
+.p-button{
+    background: rgba(67, 111, 192, 0.678);
+    border: 1px solid rgba(67, 111, 192, 0.678);
+}
+
+.p-datatable .p-datatable-thead > tr > th{
+    background: white;
+}

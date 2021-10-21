@@ -1,0 +1,23 @@
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrapalign-items-center justify-content justify-content-lg-start">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+      </a>
+      <img src="https://i.imgur.com/hMQKY8k.png" height="45px">
+
+      <ul class="nav col-8 col-md-9 col-lg-7 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a (click)="bienvenido()" pButton class="nav-link mx-2 text-white">Inicio</a></li>
+        <li><a (click)="conductor()" pButton class="nav-link mx-2 text-white">Conductores</a></li>
+        <li><a (click)="supervisor()" pButton class="nav-link mx-2 text-white">Supervisores</a></li>
+        <li><a (click)="vehiculo()" pButton class="nav-link mx-2 text-white">Vehiculos</a></li>
+        <li><a (click)="auditoria()" pButton class="nav-link mx-2 text-white">Auditoria</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="contenido">
+  <div class="row">
+    <router-outlet>
+    </router-outlet>
+  </div>
+</div>
